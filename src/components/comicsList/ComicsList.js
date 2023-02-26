@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
@@ -36,8 +37,6 @@ const ComicsList = () => {
 		setComicsEnded(ended);
 	};
 
-	const itemRefs = useRef([]);
-
 	function renderItems(arr) {
 		const items = arr.map(({ id, thumbnail, name, price }, i) => {
 			let imgStyle = { objectFit: 'cover' };
@@ -50,8 +49,8 @@ const ComicsList = () => {
 			}
 
 			return (
-				<li className="comics__item" key={id}>
-					<a href="##">
+				<li className="comics__item" key={i}>
+					<Link to={`/comics/${id}`}>
 						<img
 							src={thumbnail}
 							alt={name}
@@ -59,8 +58,8 @@ const ComicsList = () => {
 							className="comics__item-img"
 						/>
 						<div className="comics__item-name">{name}</div>
-						<div className="comics__item-price">{price} $</div>
-					</a>
+						<div className="comics__item-price">{price}</div>
+					</Link>
 				</li>
 			);
 		});
